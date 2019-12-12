@@ -4,6 +4,7 @@ const fs = require('fs');
 
 module.exports.addOneUser = (req, res) => {
 	const User = new userModel({
+		name: req.body.name,
 		email: req.body.email
 	});
 
@@ -27,7 +28,8 @@ module.exports.addmanyUser = (req, res) => {
 
 	usersArray.forEach((user) => {
 		const User = new userModel({
-			email: user
+			name: user.name,
+			email: user.email
 		});
 
 		User.save();
@@ -60,7 +62,27 @@ module.exports.getAllUsers = (req, res) => {
 module.exports.execute = (req, res) => {
 	userModel.find({}, (err, usersFound) => {
 		const shuffledUsers = _.shuffle(usersFound);
-		const pairedUsers = _.chunk(shuffledUsers, 2);
+		let pairedUsers = [];
+
+		for (let i = 0; i < shuffledUsers.length; i++) {
+			let user = {};
+			if (i === shuffledUsers.length - 1) {
+				user = {
+					name: shuffledUsers[i].email,
+					email: shuffledUsers[i].email,
+					santaName: shuffledUsers[0].name,
+					santaEmail: shuffledUsers[0].email
+				};
+			} else {
+				user = {
+					name: shuffledUsers[i].name,
+					email: shuffledUsers[i].email,
+					santaName: shuffledUsers[i + 1].name,
+					santaEmail: shuffledUsers[i + 1].email
+				};
+			}
+			pairedUsers.push(user);
+		}
 
 		fs.writeFileSync('matching.json', JSON.stringify({ users: pairedUsers }));
 
@@ -75,23 +97,13 @@ module.exports.getMySecretSanta = (req, res) => {
 	const users = JSON.parse(fs.readFileSync('matching.json')).users;
 
 	users.forEach((userArr) => {
-		if (userArr[0].email === req.body.email) {
-			if (userArr.length === 1) {
-				return res.status(200).send({
-					error: false,
-					message: 'Sorry you have no match in our system'
-				});
-			}
-
-			return res.status.send({
-				error: false,
-				message: `Your secret santa is ${userArr[1].email}`
-			});
-		} else if (userArr[1].email === req.body.email) {
+		if (userArr.email === req.body.email) {
 			return res.status(200).send({
 				error: false,
-				message: `Your secret santa is ${userArr[0].email}`
-			});
+				message: `Your secret santa is ${userArr.santaName}`,
+				santaName: userArr.santaName,
+				santaEmail: userArr.santaEmail
+			})
 		}
 	});
 };
