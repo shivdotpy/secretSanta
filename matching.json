@@ -1,0 +1,45 @@
+{
+    "users": [
+        [
+            {
+                "_id": "5df1ff07ed4a72005d5215f3",
+                "email": "amar.mathur@nagarro.com",
+                "createdAt": "2019-12-12T08:49:11.923Z",
+                "updatedAt": "2019-12-12T08:49:11.923Z",
+                "__v": 0
+            },
+            {
+                "_id": "5df1ff4eed4a72005d5215fc",
+                "email": "vivek.tak@nagarro.com",
+                "createdAt": "2019-12-12T08:50:22.930Z",
+                "updatedAt": "2019-12-12T08:50:22.930Z",
+                "__v": 0
+            }
+        ],
+        [
+            {
+                "_id": "5df1ff07ed4a72005d5215f5",
+                "email": "def@mailinator.com",
+                "createdAt": "2019-12-12T08:49:11.923Z",
+                "updatedAt": "2019-12-12T08:49:11.923Z",
+                "__v": 0
+            },
+            {
+                "_id": "5df1ff07ed4a72005d5215f4",
+                "email": "abc@mailinator.com",
+                "createdAt": "2019-12-12T08:49:11.923Z",
+                "updatedAt": "2019-12-12T08:49:11.923Z",
+                "__v": 0
+            }
+        ],
+        [
+            {
+                "_id": "5df1fdf2b02278110d5335a3",
+                "email": "shiv.sharma@nagarro.com",
+                "createdAt": "2019-12-12T08:44:34.097Z",
+                "updatedAt": "2019-12-12T08:44:34.097Z",
+                "__v": 0
+            }
+        ]
+    ]
+}
