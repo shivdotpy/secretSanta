@@ -6,6 +6,9 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const http = require('http').createServer(app);
 
+// routes
+const userRoute = require('./routes/user.routes')
+
 const PORT = process.env.PORT || 3000;
 
 // CORS
@@ -22,6 +25,9 @@ app.use(bodyParser.urlencoded({ extended: true, limit: '100mb' }));
 app.get('/', (req, res) => {
 	res.send('App is working');
 });
+
+
+app.use('/api/user/', userRoute)
 
 
 http.listen(PORT);
